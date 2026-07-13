@@ -243,9 +243,11 @@ function Skills() {
 }
 
 const PROJECTS = [
-  { title: "Project Title One", desc: "Short description of the project — replace with your actual project details.", link: "#" },
-  { title: "Project Title Two", desc: "Short description of the project — replace with your actual project details.", link: "#" },
-  { title: "Project Title Three", desc: "Short description of the project — replace with your actual project details.", link: "#" },
+  { title: "Smart Conference Room Reservation", desc: "A simple website that helps users reserve meeting rooms, check real-time availability, and manage office bookings efficiently.", tech: "HTML, CSS, JavaScript", link: "https://p-github-coder.github.io/OFFICE_RESERVATION/", img: proj1.url },
+  { title: "Ticket Generator", desc: "An application for generating conference tickets.", tech: "HTML, CSS, JavaScript", link: "https://p-github-coder.github.io/CONFERENCE_TICKET/", img: proj2.url },
+  { title: "Logistico", desc: "A cargo transportation web application.", tech: "HTML, CSS", link: "https://p-github-coder.github.io/LABCLASS2/", img: proj3.url },
+  { title: "Consula", desc: "A business consulting agency website.", tech: "HTML, CSS", link: "https://p-github-coder.github.io/LABCLASS1/", img: proj4.url },
+  { title: "HireHub", desc: "A job search web application.", tech: "HTML, CSS", link: "https://p-github-coder.github.io/WEEKENDASSIGNMENT/", img: proj5.url },
 ];
 
 function Projects() {
