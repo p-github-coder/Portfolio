@@ -402,7 +402,7 @@ function Footer() {
             <div className="flex gap-2">
               <SocialIcon href={GITHUB} icon={Github} label="GitHub" />
               <SocialIcon href={LINKEDIN} icon={Linkedin} label="LinkedIn" />
-              <SocialIcon href={`https://wa.me/${PHONE}`} icon={MessageCircle} label="WhatsApp" />
+              <SocialIcon href={WHATSAPP} icon={MessageCircle} label="WhatsApp" />
               <SocialIcon href={INSTAGRAM} icon={Instagram} label="Instagram" />
             </div>
           </div>
