@@ -260,18 +260,13 @@ function Projects() {
             <article key={i}
               className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]">
               <div className="relative aspect-[4/3] overflow-hidden bg-primary/5">
-                <div className="absolute inset-0 grid place-items-center text-muted-foreground">
-                  <div className="text-center">
-                    <div className="mx-auto mb-2 grid h-14 w-14 place-items-center rounded-xl bg-primary/10">
-                      <Code2 className="h-6 w-6 text-primary" />
-                    </div>
-                    <p className="text-xs">Project image placeholder</p>
-                  </div>
-                </div>
+                <img src={p.img} alt={p.title} loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-6">
                 <h3 className="font-display text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
+                <p className="mt-2 text-xs font-medium text-primary/80">{p.tech}</p>
                 <a href={p.link} target="_blank" rel="noreferrer"
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
                   View Live Demo <ArrowRight className="h-4 w-4" />
