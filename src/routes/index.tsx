@@ -316,8 +316,11 @@ function Contact() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hi Pamela, I'm ${name} (${email}).%0A%0A${encodeURIComponent(message)}`;
-    window.open(`https://wa.me/${PHONE}?text=${text}`, "_blank");
+    const subject = encodeURIComponent("Portfolio Contact");
+    const body = encodeURIComponent(
+      `Full Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -328,7 +331,7 @@ function Contact() {
           <div className="lg:col-span-2 space-y-4">
             <ContactItem icon={Mail} label="Email" value={EMAIL} href={`mailto:${EMAIL}`} />
             <ContactItem icon={Phone} label="Phone" value="08130428822" href={`tel:+2348130428822`} />
-            <ContactItem icon={MessageCircle} label="WhatsApp" value="Chat with me" href={`https://wa.me/${PHONE}`} />
+            <ContactItem icon={MessageCircle} label="WhatsApp" value="Chat with me" href={WHATSAPP} />
           </div>
           <form onSubmit={submit} className="lg:col-span-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] space-y-4">
             <div>
