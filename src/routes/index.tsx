@@ -26,11 +26,12 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const PHONE = "2348130428822"; // WhatsApp intl format (NG +234)
+const PHONE = "2348130428822";
+const WHATSAPP = "https://api.whatsapp.com/send?phone=2348130428822";
 const EMAIL = "uzlivinus@gmail.com";
 const LINKEDIN = "https://www.linkedin.com/in/chinagorom-pamela-henry-5a9300380";
 const GITHUB = "https://github.com/p-github-coder";
-const INSTAGRAM = "#";
+const INSTAGRAM = "https://www.instagram.com/pamzy_ella/";
 
 const NAV = [
   { href: "#home", label: "Home" },
