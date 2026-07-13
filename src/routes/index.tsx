@@ -6,12 +6,11 @@ import {
 } from "lucide-react";
 import profileImg from "@/assets/profile.jpeg";
 import logoImg from "@/assets/logo.png";
-import proj1 from "@/assets/proj_634.png.asset.json";
-import proj2 from "@/assets/proj_633.png.asset.json";
-import proj3 from "@/assets/proj_635.png.asset.json";
-import proj4 from "@/assets/proj_636.png.asset.json";
-import proj5 from "@/assets/proj_637.png.asset.json";
-
+import proj1 from "@/assets/proj_634.png";
+import proj2 from "@/assets/proj_633.png";
+import proj3 from "@/assets/proj_635.png";
+import proj4 from "@/assets/proj_636.png";
+import proj5 from "@/assets/proj_637.png";
 export const Route = createFileRoute("/")({
   component: Portfolio,
   head: () => ({
