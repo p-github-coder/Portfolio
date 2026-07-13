@@ -6,6 +6,11 @@ import {
 } from "lucide-react";
 import profileImg from "@/assets/profile.jpeg";
 import logoImg from "@/assets/logo.png";
+import proj1 from "@/assets/proj_634.png.asset.json";
+import proj2 from "@/assets/proj_633.png.asset.json";
+import proj3 from "@/assets/proj_635.png.asset.json";
+import proj4 from "@/assets/proj_636.png.asset.json";
+import proj5 from "@/assets/proj_637.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -21,11 +26,12 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const PHONE = "2348130428822"; // WhatsApp intl format (NG +234)
+const PHONE = "2348130428822";
+const WHATSAPP = "https://api.whatsapp.com/send?phone=2348130428822";
 const EMAIL = "uzlivinus@gmail.com";
 const LINKEDIN = "https://www.linkedin.com/in/chinagorom-pamela-henry-5a9300380";
 const GITHUB = "https://github.com/p-github-coder";
-const INSTAGRAM = "#";
+const INSTAGRAM = "https://www.instagram.com/pamzy_ella/";
 
 const NAV = [
   { href: "#home", label: "Home" },
@@ -84,7 +90,7 @@ function Loader() {
         <span className="absolute h-24 w-24 rounded-full border-2 border-primary/40 animate-pulse-ring" />
         <span className="absolute h-24 w-24 rounded-full border-2 border-primary/20 animate-pulse-ring" style={{ animationDelay: "0.5s" }} />
         <div className="relative h-16 w-16 rounded-2xl bg-primary/10 grid place-items-center animate-spin-slow">
-          <Code2 className="h-8 w-8 text-primary" />
+          <span className="font-display text-3xl font-bold text-primary">P</span>
         </div>
       </div>
       <p className="mt-8 font-display text-sm tracking-[0.3em] text-muted-foreground uppercase">Loading Portfolio</p>
@@ -237,9 +243,11 @@ function Skills() {
 }
 
 const PROJECTS = [
-  { title: "Project Title One", desc: "Short description of the project — replace with your actual project details.", link: "#" },
-  { title: "Project Title Two", desc: "Short description of the project — replace with your actual project details.", link: "#" },
-  { title: "Project Title Three", desc: "Short description of the project — replace with your actual project details.", link: "#" },
+  { title: "Smart Conference Room Reservation", desc: "A simple website that helps users reserve meeting rooms, check real-time availability, and manage office bookings efficiently.", tech: "HTML, CSS, JavaScript", link: "https://p-github-coder.github.io/OFFICE_RESERVATION/", img: proj1.url },
+  { title: "Ticket Generator", desc: "An application for generating conference tickets.", tech: "HTML, CSS, JavaScript", link: "https://p-github-coder.github.io/CONFERENCE_TICKET/", img: proj2.url },
+  { title: "Logistico", desc: "A cargo transportation web application.", tech: "HTML, CSS", link: "https://p-github-coder.github.io/LABCLASS2/", img: proj3.url },
+  { title: "Consula", desc: "A business consulting agency website.", tech: "HTML, CSS", link: "https://p-github-coder.github.io/LABCLASS1/", img: proj4.url },
+  { title: "HireHub", desc: "A job search web application.", tech: "HTML, CSS", link: "https://p-github-coder.github.io/WEEKENDASSIGNMENT/", img: proj5.url },
 ];
 
 function Projects() {
@@ -252,18 +260,13 @@ function Projects() {
             <article key={i}
               className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]">
               <div className="relative aspect-[4/3] overflow-hidden bg-primary/5">
-                <div className="absolute inset-0 grid place-items-center text-muted-foreground">
-                  <div className="text-center">
-                    <div className="mx-auto mb-2 grid h-14 w-14 place-items-center rounded-xl bg-primary/10">
-                      <Code2 className="h-6 w-6 text-primary" />
-                    </div>
-                    <p className="text-xs">Project image placeholder</p>
-                  </div>
-                </div>
+                <img src={p.img} alt={p.title} loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-6">
                 <h3 className="font-display text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
+                <p className="mt-2 text-xs font-medium text-primary/80">{p.tech}</p>
                 <a href={p.link} target="_blank" rel="noreferrer"
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
                   View Live Demo <ArrowRight className="h-4 w-4" />
@@ -313,8 +316,11 @@ function Contact() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hi Pamela, I'm ${name} (${email}).%0A%0A${encodeURIComponent(message)}`;
-    window.open(`https://wa.me/${PHONE}?text=${text}`, "_blank");
+    const subject = encodeURIComponent("Portfolio Contact");
+    const body = encodeURIComponent(
+      `Full Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -325,7 +331,7 @@ function Contact() {
           <div className="lg:col-span-2 space-y-4">
             <ContactItem icon={Mail} label="Email" value={EMAIL} href={`mailto:${EMAIL}`} />
             <ContactItem icon={Phone} label="Phone" value="08130428822" href={`tel:+2348130428822`} />
-            <ContactItem icon={MessageCircle} label="WhatsApp" value="Chat with me" href={`https://wa.me/${PHONE}`} />
+            <ContactItem icon={MessageCircle} label="WhatsApp" value="Chat with me" href={WHATSAPP} />
           </div>
           <form onSubmit={submit} className="lg:col-span-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] space-y-4">
             <div>
@@ -396,7 +402,7 @@ function Footer() {
             <div className="flex gap-2">
               <SocialIcon href={GITHUB} icon={Github} label="GitHub" />
               <SocialIcon href={LINKEDIN} icon={Linkedin} label="LinkedIn" />
-              <SocialIcon href={`https://wa.me/${PHONE}`} icon={MessageCircle} label="WhatsApp" />
+              <SocialIcon href={WHATSAPP} icon={MessageCircle} label="WhatsApp" />
               <SocialIcon href={INSTAGRAM} icon={Instagram} label="Instagram" />
             </div>
           </div>
