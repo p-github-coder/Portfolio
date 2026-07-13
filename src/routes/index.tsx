@@ -90,7 +90,7 @@ function Loader() {
         <span className="absolute h-24 w-24 rounded-full border-2 border-primary/40 animate-pulse-ring" />
         <span className="absolute h-24 w-24 rounded-full border-2 border-primary/20 animate-pulse-ring" style={{ animationDelay: "0.5s" }} />
         <div className="relative h-16 w-16 rounded-2xl bg-primary/10 grid place-items-center animate-spin-slow">
-          <Code2 className="h-8 w-8 text-primary" />
+          <span className="font-display text-3xl font-bold text-primary">P</span>
         </div>
       </div>
       <p className="mt-8 font-display text-sm tracking-[0.3em] text-muted-foreground uppercase">Loading Portfolio</p>
