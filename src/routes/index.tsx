@@ -153,7 +153,7 @@ function Hero() {
             <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-3xl" />
             <div className="relative rounded-full p-2 animate-float" style={{ background: "var(--gradient-primary)" }}>
               <div className="rounded-full bg-background p-2">
-                <img src={profileImg} alt="Henry Pamela" className="h-64 w-64 rounded-full object-cover sm:h-80 sm:w-80" />
+                <img src={profileImg} alt="Henry Pamela" width={320} height={320} fetchPriority="high" decoding="async" className="h-64 w-64 rounded-full object-cover sm:h-80 sm:w-80" />
               </div>
             </div>
             {/* floating stat cards */}
