@@ -46,13 +46,29 @@ const NAV = [
 
 function Portfolio() {
   const [loading, setLoading] = useState(true);
+  const [exiting, setExiting] = useState(false);
   const [dark, setDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(t);
+    const exitTimer = setTimeout(() => setExiting(true), 2000);
+    const removeTimer = setTimeout(() => setLoading(false), 2300);
+    return () => {
+      clearTimeout(exitTimer);
+      clearTimeout(removeTimer);
+    };
   }, []);
+
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
 
   useEffect(() => {
     const stored = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
@@ -69,26 +85,35 @@ function Portfolio() {
     localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  if (loading) return <Loader />;
-
   return (
-    <div className="min-h-screen bg-background text-foreground animate-fade-in">
-      <Nav dark={dark} toggleTheme={toggleTheme} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <main>
-        <Hero />
-        <Skills />
-        <Projects />
-        <Services />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <>
+      {loading && <Loader exiting={exiting} />}
+      <div
+        className={`min-h-screen bg-background text-foreground transition-opacity duration-300 ease-out will-change-[opacity] ${
+          exiting ? "opacity-100" : "opacity-0 pointer-events-none select-none"
+        }`}
+      >
+        <Nav dark={dark} toggleTheme={toggleTheme} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <main>
+          <Hero />
+          <Skills />
+          <Projects />
+          <Services />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
 
-function Loader() {
+function Loader({ exiting }: { exiting: boolean }) {
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-background">
+    <div
+      className={`fixed inset-0 z-50 grid place-items-center bg-background transition-opacity duration-300 ease-out will-change-[opacity] ${
+        exiting ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
       <div className="relative grid place-items-center">
         <span className="absolute h-24 w-24 rounded-full border-2 border-primary/40 animate-pulse-ring" />
         <span className="absolute h-24 w-24 rounded-full border-2 border-primary/20 animate-pulse-ring" style={{ animationDelay: "0.5s" }} />
