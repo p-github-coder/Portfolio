@@ -381,7 +381,7 @@ function Footer() {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <a href="#home" className="flex items-center gap-2">
-              <img src={logoImg} alt="logo" className="h-9 w-9 rounded-lg object-cover" />
+              <img src={logoImg} alt="logo" width={36} height={36} loading="lazy" decoding="async" className="h-9 w-9 rounded-lg object-cover" />
               <span className="font-display text-lg font-bold">Pamela<span className="text-primary">.</span></span>
             </a>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
