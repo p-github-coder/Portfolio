@@ -230,7 +230,7 @@ function Skills() {
             <div key={s.name}
               className="group rounded-2xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)] transition-all hover:-translate-y-2 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]">
               <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-2xl bg-primary/10 transition-transform group-hover:scale-110">
-                <img src={s.src} alt={s.name} className="h-12 w-12" />
+                <img src={s.src} alt={s.name} width={48} height={48} loading="lazy" decoding="async" className="h-12 w-12" />
               </div>
               <h3 className="font-display text-lg font-semibold">{s.name}</h3>
             </div>
