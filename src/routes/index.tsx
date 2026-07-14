@@ -259,7 +259,7 @@ function Projects() {
             <article key={i}
               className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]">
               <div className="relative aspect-[4/3] overflow-hidden bg-primary/5">
-                <img src={p.img} alt={p.title} loading="lazy"
+                <img src={p.img} alt={p.title} loading="lazy" decoding="async" width={800} height={600}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-6">
