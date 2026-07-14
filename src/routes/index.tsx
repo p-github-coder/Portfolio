@@ -6,11 +6,11 @@ import {
 } from "lucide-react";
 import profileImg from "@/assets/profile.jpeg";
 import logoImg from "@/assets/logo.png";
-import proj1 from "@/assets/proj_634.png";
-import proj2 from "@/assets/proj_633.png";
-import proj3 from "@/assets/proj_635.png";
-import proj4 from "@/assets/proj_636.png";
-import proj5 from "@/assets/proj_637.png";
+import proj1 from "@/assets/proj_634.webp";
+import proj2 from "@/assets/proj_633.webp";
+import proj3 from "@/assets/proj_635.webp";
+import proj4 from "@/assets/proj_636.webp";
+import proj5 from "@/assets/proj_637.webp";
 export const Route = createFileRoute("/")({
   component: Portfolio,
   head: () => ({
@@ -21,6 +21,10 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Front-end engineer building user-friendly, reliable, scalable web apps." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "preload", as: "image", href: profileImg, fetchpriority: "high" } as any,
+      { rel: "preload", as: "image", href: logoImg } as any,
     ],
   }),
 });
@@ -104,7 +108,7 @@ function Nav({ dark, toggleTheme, menuOpen, setMenuOpen }: {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#home" className="flex items-center gap-2">
-          <img src={logoImg} alt="Pamela Henry logo" className="h-9 w-9 rounded-lg object-cover" />
+          <img src={logoImg} alt="Pamela Henry logo" width={36} height={36} fetchPriority="high" decoding="async" className="h-9 w-9 rounded-lg object-cover" />
           <span className="font-display text-lg font-bold">Pamela<span className="text-primary">.</span></span>
         </a>
         <nav className="hidden items-center gap-1 md:flex">
@@ -153,7 +157,7 @@ function Hero() {
             <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-3xl" />
             <div className="relative rounded-full p-2 animate-float" style={{ background: "var(--gradient-primary)" }}>
               <div className="rounded-full bg-background p-2">
-                <img src={profileImg} alt="Henry Pamela" className="h-64 w-64 rounded-full object-cover sm:h-80 sm:w-80" />
+                <img src={profileImg} alt="Henry Pamela" width={320} height={320} fetchPriority="high" decoding="async" className="h-64 w-64 rounded-full object-cover sm:h-80 sm:w-80" />
               </div>
             </div>
             {/* floating stat cards */}
@@ -230,7 +234,7 @@ function Skills() {
             <div key={s.name}
               className="group rounded-2xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)] transition-all hover:-translate-y-2 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]">
               <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-2xl bg-primary/10 transition-transform group-hover:scale-110">
-                <img src={s.src} alt={s.name} className="h-12 w-12" />
+                <img src={s.src} alt={s.name} width={48} height={48} loading="lazy" decoding="async" className="h-12 w-12" />
               </div>
               <h3 className="font-display text-lg font-semibold">{s.name}</h3>
             </div>
@@ -259,7 +263,7 @@ function Projects() {
             <article key={i}
               className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]">
               <div className="relative aspect-[4/3] overflow-hidden bg-primary/5">
-                <img src={p.img} alt={p.title} loading="lazy"
+                <img src={p.img} alt={p.title} loading="lazy" decoding="async" width={800} height={600}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-6">
@@ -381,7 +385,7 @@ function Footer() {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <a href="#home" className="flex items-center gap-2">
-              <img src={logoImg} alt="logo" className="h-9 w-9 rounded-lg object-cover" />
+              <img src={logoImg} alt="logo" width={36} height={36} loading="lazy" decoding="async" className="h-9 w-9 rounded-lg object-cover" />
               <span className="font-display text-lg font-bold">Pamela<span className="text-primary">.</span></span>
             </a>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
