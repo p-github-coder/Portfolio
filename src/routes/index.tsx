@@ -104,7 +104,7 @@ function Nav({ dark, toggleTheme, menuOpen, setMenuOpen }: {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#home" className="flex items-center gap-2">
-          <img src={logoImg} alt="Pamela Henry logo" className="h-9 w-9 rounded-lg object-cover" />
+          <img src={logoImg} alt="Pamela Henry logo" width={36} height={36} fetchPriority="high" decoding="async" className="h-9 w-9 rounded-lg object-cover" />
           <span className="font-display text-lg font-bold">Pamela<span className="text-primary">.</span></span>
         </a>
         <nav className="hidden items-center gap-1 md:flex">
