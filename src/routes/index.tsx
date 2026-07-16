@@ -208,7 +208,7 @@ function Hero() {
             I am a web developer passionate about building user-friendly, reliable, and scalable web applications with modern frontend technologies.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            <a href={`mailto:${EMAIL}`}
+            <a href={`mailto:${EMAIL}?subject=Hiring%20Inquiry`}
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5">
               Hire Me <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
