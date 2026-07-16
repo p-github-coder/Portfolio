@@ -208,7 +208,7 @@ function Hero() {
             I am a web developer passionate about building user-friendly, reliable, and scalable web applications with modern frontend technologies.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            <a href={`mailto:${EMAIL}`}
+            <a href={`mailto:${EMAIL}?subject=Hiring%20Inquiry`}
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5">
               Hire Me <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
@@ -341,14 +341,28 @@ function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const submit = (e: React.FormEvent) => {
+  const encode = (data: Record<string, string>) =>
+    Object.keys(data)
+      .map(k => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]))
+      .join("&");
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent("Portfolio Contact");
-    const body = encodeURIComponent(
-      `Full Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    setStatus("sending");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", name, email, message }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
+      setStatus("sent");
+      setName(""); setEmail(""); setMessage("");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -361,32 +375,50 @@ function Contact() {
             <ContactItem icon={Phone} label="Phone" value="08130428822" href={`tel:+2348130428822`} />
             <ContactItem icon={MessageCircle} label="WhatsApp" value="Chat with me" href={WHATSAPP} />
           </div>
-          <form onSubmit={submit} className="lg:col-span-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] space-y-4">
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onSubmit={submit}
+            className="lg:col-span-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] space-y-4"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
             <div>
               <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Full Name</label>
-              <input required value={name} onChange={e => setName(e.target.value)}
+              <input required name="name" value={name} onChange={e => setName(e.target.value)}
                 className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20" />
             </div>
             <div>
               <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Email</label>
-              <input required type="email" value={email} onChange={e => setEmail(e.target.value)}
+              <input required type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
                 className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20" />
             </div>
             <div>
               <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Message</label>
-              <textarea required rows={4} placeholder="Type your message here" value={message} onChange={e => setMessage(e.target.value)}
+              <textarea required name="message" rows={4} placeholder="Type your message here" value={message} onChange={e => setMessage(e.target.value)}
                 className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20" />
             </div>
-            <button type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5">
-              Send Message <Send className="h-4 w-4" />
+            <button type="submit" disabled={status === "sending"}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5 disabled:opacity-60">
+              {status === "sending" ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
             </button>
+            {status === "sent" && (
+              <p className="text-sm text-primary text-center">Thanks! Your message has been sent.</p>
+            )}
+            {status === "error" && (
+              <p className="text-sm text-red-500 text-center">Something went wrong. Please try again.</p>
+            )}
           </form>
         </div>
       </div>
     </section>
   );
 }
+
 
 function ContactItem({ icon: Icon, label, value, href }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; href: string }) {
   return (
