@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       { title: "Henry Pamela — Front-End Engineer" },
       { name: "description", content: "Portfolio of Henry Pamela, a front-end engineer building fast, user-friendly, scalable web apps." },
       { property: "og:title", content: "Henry Pamela — Front-End Engineer" },
-      { property: "og:description", content: "Front-end engineer building user-friendly, reliable, scalable web apps." },
+      { property: "og:description", content: "Portfolio of Henry Pamela, a front-end engineer building fast, user-friendly, scalable web apps." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
